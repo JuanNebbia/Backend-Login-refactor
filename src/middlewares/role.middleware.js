@@ -2,10 +2,9 @@ const roleMiddleware = async (req, res, next) => {
     const { email, password } = req.body
     if(email == "adminCoder@coder.com" && password == 'adminCod3r123'){
         req.session.user = {
-            name: 'admin',
+            name: 'Admin',
             lastName: 'Coder',
             email: 'adminCoder@coder.com',
-            age: 15,
             role: 'admin'
         }
         req.session.save(err => {

@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const handlebars = require('express-handlebars')
 const { Server } = require('socket.io')
+const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
@@ -17,13 +18,10 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 app.use('/statics', express.static(path.resolve(__dirname, '../public')))
+app.use(cookieParser())
 app.use(session({
-    name: 'session',
-    secret:'contraseña123' ,
-    cookie: {
-        maxAge: 60000 * 60,
-        httpOnly: true
-    },
+    name: 'start-solo',
+    secret:'contraseña123',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
@@ -61,3 +59,11 @@ io.on('connection', (socket)=>{
         socket.broadcast.emit('new-user', user)
     })
 })
+
+
+
+// App ID: 293995
+
+// Client ID: Iv1.b64438eddbef112a
+
+// Secret: 5d13665a8920d446f405d371dfbb9af26561a52e
